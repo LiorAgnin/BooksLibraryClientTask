@@ -10,7 +10,7 @@
       </h4>
     </div>
     <div class="modal-body">
-      <form #editForm="ngForm" (ngSubmit)="editBook(editForm)">
+      <form #editForm="ngForm" (ngSubmit)="editBook()">
         <div class="form-group">
           <label for="autuor">Autuor</label>
           <input type="text" class="form-control" name="autuor" [(ngModel)]="book.Autuor" required #trvAutuor="ngModel">
