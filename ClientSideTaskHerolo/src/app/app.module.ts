@@ -10,7 +10,7 @@ import { BooksComponent } from './components/books/books.component';
 import { BooksServiceService } from "./services/books-service.service";
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { routes } from './app.routers';
 import { TitleFilterPipe } from './pipes/title-filter.pipe';
 
@@ -26,7 +26,7 @@ import { TitleFilterPipe } from './pipes/title-filter.pipe';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
    RouterModule.forRoot(routes)
   ],
   providers: [BooksServiceService],

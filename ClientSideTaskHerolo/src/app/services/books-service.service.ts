@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 import { Books } from '../models/books';
 import 'rxjs/add/operator/map';
@@ -7,11 +7,11 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class BooksServiceService {
   private url: string;
-  constructor(private http: Http) {
-    this.url = 'https://api.myjson.com/bins/al447/';
+  constructor(private http: HttpClient) {
+    this.url = 'https://api.myjson.com/bins/cv8wn/';
   }
   getBooks() {
-    return this.http.get(this.url).map((res: Response) => res.json());
+    return this.http.get<Books[]>(this.url);
   }
   Post(body: any) {
     return this.http.post(this.url, body).map((res: Response) => { return res.json() })

@@ -3,4 +3,5 @@ export interface Books {
     Autuor: string;
     Title: string;
     Date: string;
+    Image: string;
 }
