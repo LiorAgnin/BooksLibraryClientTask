@@ -15,6 +15,8 @@ export class BooksComponent implements OnInit {
   bookToEdit: Books;
   bookStatus: BooksStatus = BooksStatus.ShowBooks;
   messeges: string;
+  send: boolean = false;
+
   constructor(private booksService: BooksServiceService) { }
   ngOnInit() {
     this.booksService.getBooks().subscribe(books => {
@@ -34,7 +36,6 @@ export class BooksComponent implements OnInit {
     this.bookStatus = BooksStatus.ShowBooks
   }
   deleteBook(bookToDelete: Books) {
-    console.log("current book", bookToDelete);
     this.bookToDelete = bookToDelete;
   }
   editBook(bookToEdit: Books) {
@@ -50,16 +51,24 @@ export class BooksComponent implements OnInit {
     }
   }
   addBookHandler(event: Books) {
-    debugger;
     if (!this.checkIfBookExist(event)) {
+      const bookToAdd = {
+        "Autuor": event.Autuor,
+        "Date": event.Date,
+        "Title": event.Title,
+        "Image": event.Image,
+      }
       this.arrBooks.push(event);
-      const req = this.booksService.Post(event);
+      const req = this.booksService.Post(bookToAdd);
       req.subscribe(posts => {
       },
         (err) => {
+          console.log(err)
+
         });
       this.bookStatus = BooksStatus.ShowBooks;
       this.messeges = "Add Success";
+      this.saveTodos();
     } else {
       window.alert("Book title already exist. Please change the title");
     }
@@ -68,7 +77,10 @@ export class BooksComponent implements OnInit {
     let index = this.arrBooks.indexOf(this.bookToDelete);
     this.arrBooks.splice(index, 1);
     this.messeges = "Book deleted succsesfully";
-    const req = this.booksService.Delete(index + 1).subscribe(response => {
+    this.saveTodos();
+
+    const req = this.booksService.Delete(index + 1);
+    req.subscribe(response => {
       console.log("succses ", response)
     }
       , (error) => {
@@ -76,17 +88,25 @@ export class BooksComponent implements OnInit {
       });
   }
   editBookHandler(event: Books) {
-    console.log(event);
     if (!this.checkIfBookExist(event)) {
+      const bookToEdit = {
+        "Id": event.Id,
+        "Autuor": event.Autuor,
+        "Date": event.Date,
+        "Title": event.Title,
+        "Image": event.Image,
+      }
       let bookToEditIndex = this.arrBooks.indexOf(event);
       this.arrBooks[bookToEditIndex] = event;
-      const req = this.booksService.Put(event);
+      const req = this.booksService.Put(bookToEdit);
       req.subscribe(book => {
+        console.log(book);
       },
         (err) => {
         });
       this.bookStatus = BooksStatus.ShowBooks;
-      this.messeges = "Edit Succeeded"
+      this.messeges = "Edit Succeeded";
+      this.saveTodos();
     }
     else {
       window.alert("Book title already exist. Please change the title");
@@ -103,5 +123,12 @@ export class BooksComponent implements OnInit {
       }
     }
     return isExist;
+  }
+  saveTodos(): void {
+    this.send = true;
+    setTimeout(function () {
+      this.send = false;
+      this.formhiden = true;
+    }.bind(this), 2000);
   }
 }

@@ -1,0 +1,12 @@
+
+img{
+    width: 200px ;
+    height: 200px ;
+    border: 1 solid green;
+}
+#founders{
+    background-color: rgba(255, 255, 255, 0.47) ;
+    color: black !important;
+    font-size: 30px !important;
+    font-weight: bold
+}

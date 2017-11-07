@@ -12,7 +12,6 @@ export class EditBookComponent implements OnInit {
   @Output() onClickEdit = new EventEmitter<Books>();
   constructor(private booksService: BooksServiceService) { }
   editBook(editForm: any) {
-    console.log(this.book);
     this.onClickEdit.emit(this.book);
   }
   ngOnInit() {

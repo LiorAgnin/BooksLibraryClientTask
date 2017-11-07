@@ -6,6 +6,7 @@ import { AddBookComponent } from './components/add-book/add-book.component';
 import { EditBookComponent } from './components/edit-book/edit-book.component';
 import { DeleteBookComponent } from './components/delete-book/delete-book.component';
 import { BooksComponent } from './components/books/books.component';
+import { HomeComponent } from './components/home/home.component';
 
 import { BooksServiceService } from "./services/books-service.service";
 import { FormsModule } from '@angular/forms';
@@ -21,6 +22,7 @@ import { TitleFilterPipe } from './pipes/title-filter.pipe';
     EditBookComponent,
     DeleteBookComponent,
     BooksComponent,
+    HomeComponent,
     TitleFilterPipe
   ],
   imports: [
