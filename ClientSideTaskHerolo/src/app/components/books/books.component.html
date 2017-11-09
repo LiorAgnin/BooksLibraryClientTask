@@ -4,7 +4,7 @@
   <add-book (onClickForm)="addBookHandler($event)" *ngIf="IsAddBooksStatus()"></add-book>
   <edit-book [book]="bookToEdit" (onClickEdit)="editBookHandler($event)" *ngIf="IsEditBooksStatus()" class="modal fade" id="myModalNorm"
     tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></edit-book>
-  <div class="table-responsive" *ngIf="IsShowBooksStatus()">
+  <div class="table-responsive" *ngIf="IsShowBooksStatus() || IsEditBooksStatus()">
     <table class="table table-hover">
       <thead>
         <tr>
@@ -22,7 +22,7 @@
           <td> {{item.Title | capitalize:true}}</td>
           <td> {{item.Date}}</td>
           <td>
-            <img [src]="item.Image"/>
+            <img [src]="item.Image" />
           </td>
           <td>
             <span data-toggle="modal" data-target="#myModalNorm" (click)="editBook(item)" class="glyphicon glyphicon-edit"></span>
@@ -32,9 +32,13 @@
           </td>
         </tr>
       </tbody>
+      <div class="alert alert-info" *ngIf="showMessage">
+        {{messeges}}
+      </div>
     </table>
-    <div class="alert alert-success" *ngIf="send">
-      {{messeges}}
-    </div>
+
+    <!-- <ng-template class="alert alert-danger" #error>
+      {{errorMessage}}
+    </ng-template> -->
   </div>
 </div>
