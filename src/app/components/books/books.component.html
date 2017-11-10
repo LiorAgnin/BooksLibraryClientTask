@@ -1,5 +1,5 @@
 <div class="container">
-  <button *ngIf="IsAddBooksStatus() ||IsEditBooksStatus() " type="button" class="btn btn-primary" (click)="showBooks()">Show Books List</button>
+  <button *ngIf="IsAddBooksStatus()" type="button" class="btn btn-primary" (click)="showBooks()">Show Books List</button>
   <button type="button" class="btn btn-primary" *ngIf="!IsAddBooksStatus()" (click)="userClickHandler()">Add Book</button>
   <add-book (onClickForm)="addBookHandler($event)" *ngIf="IsAddBooksStatus()"></add-book>
   <edit-book [book]="bookToEdit" (onClickEdit)="editBookHandler($event)" *ngIf="IsEditBooksStatus()" class="modal fade" id="myModalNorm"
@@ -36,9 +36,5 @@
         {{messeges}}
       </div>
     </table>
-
-    <!-- <ng-template class="alert alert-danger" #error>
-      {{errorMessage}}
-    </ng-template> -->
   </div>
 </div>
